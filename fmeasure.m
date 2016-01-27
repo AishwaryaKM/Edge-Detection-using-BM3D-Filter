@@ -1,5 +1,5 @@
 function [ F_measure ] = fmeasure( Timg,Gimg )
-%function to calculate precision and recall (f_measure)
+%function to calculate precision
 %%Note: Timg=Test image, Gimg=Ground truth image
 idx = (Gimg()==1);
 p = length(Gimg(idx));
