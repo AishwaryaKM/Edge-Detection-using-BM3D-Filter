@@ -1,8 +1,7 @@
 function t = fractile(x, f)
 
 %   T = FRACTILE(X, F) finds a value T for which a fraction F of the
-%   elements of X are less than T. A fractile is like a centile, except
-%   that the argument is a fraction rather then a percentage.
+%   elements of X are less than T. A fractile is like a centile.
 
 
 validateattributes(x, {'numeric'}, {});
