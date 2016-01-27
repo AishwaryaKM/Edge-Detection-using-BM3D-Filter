@@ -4,4 +4,6 @@ Edge detection of noisy images requires smoothing filters which finely balance d
 
 What we have done here?
 
-Implemented various denoising filters prior to edge detection to enhance the quality of edge deetection. Apart from the standard Gaussian filter, Median, Bilateral and BM3D have been used separately to remove the noise (AWGN) which was earlier added to the image. After denoising, Canny, Prewitt, Sobel and Robert operators have been employed for robust edge detection.
+Implemented various denoising filters prior to edge detection to enhance the quality of edge deetection. Apart from the standard Gaussian filter, Median, Bilateral and BM3D have been used separately to remove the noise (AWGN) which was earlier added to the image. After denoising, Canny, Prewitt, Sobel and Robert operators have been employed for robust edge detection. Similar results are obtained when satellite image is taken under consideration with 3 types of noises in it.
+
+Also, the same procedure is applied to a noise-free image, in which case, BM3D filter produces extra undesired edges or 'false edges' due to the inherent non-linearity.
