@@ -1,12 +1,5 @@
 function [PSNR, y_est] = BM3D(y, z, sigma, profile, print_to_screen)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  FUNCTION INTERFACE:
-%
-%  [PSNR, y_est] = BM3D(y, z, sigma, profile, print_to_screen)
-%
-%  ! The function can work without any of the input arguments, 
-%   in which case, the internal default ones are used !
 % 
 %  BASIC USAGE EXAMPLES:
 %
@@ -156,10 +149,6 @@ if strcmp(profile, 'lc') == 1,
 
 end
 
-% Profile 'vn' was proposed in 
-%  Y. Hou, C. Zhao, D. Yang, and Y. Cheng, 'Comment on "Image Denoising by Sparse 3D Transform-Domain
-%  Collaborative Filtering"', accepted for publication, IEEE Trans. on Image Processing, July, 2010.
-% as a better alternative to that initially proposed in [1] (which is currently in profile 'vn_old')
 if (strcmp(profile, 'vn') == 1) | (sigma > 40),
 
     N2                  = 32;
@@ -177,7 +166,7 @@ if (strcmp(profile, 'vn') == 1) | (sigma > 40),
     
 end
 
-% The 'vn_old' profile corresponds to the original parameters for strong noise proposed in [1].
+
 if (strcmp(profile, 'vn_old') == 1) & (sigma > 40),
 
     transform_2D_HT_name = 'dct'; 
@@ -198,10 +187,10 @@ if (strcmp(profile, 'vn_old') == 1) & (sigma > 40),
     
 end
 
-decLevel = 0;        %% dec. levels of the dyadic wavelet 2D transform for blocks (0 means full decomposition, higher values decrease the dec. number)
-thr_mask = ones(N1); %% N1xN1 mask of threshold scaling coeff. --- by default there is no scaling, however the use of different thresholds for different wavelet decompoistion subbands can be done with this matrix
+decLevel = 0;        
+thr_mask = ones(N1); 
 
-if strcmp(profile, 'high') == 1, %% this profile is not documented in [1]
+if strcmp(profile, 'high') == 1, 
     
     decLevel     = 1; 
     Nstep        = 2;
@@ -214,12 +203,6 @@ if strcmp(profile, 'high') == 1, %% this profile is not documented in [1]
     
 end
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Note: touch below this point only if you know what you are doing!
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%% Check whether to dump information to the screen or remain silent
 dump_output_information = 1;
 if (exist('print_to_screen') == 1) & (print_to_screen == 0),
     dump_output_information = 0;
@@ -232,8 +215,7 @@ end
 [TforW, TinvW] = getTransfMatrix(N1_wiener, transform_2D_Wiener_name, 0); %% get (normalized) forward and inverse transform matrices
 
 if (strcmp(transform_3rd_dim_name, 'haar') == 1) | (strcmp(transform_3rd_dim_name(end-2:end), '1.1') == 1),
-    %%% If Haar is used in the 3-rd dimension, then a fast internal transform is used, thus no need to generate transform
-    %%% matrices.
+
     hadper_trans_single_den         = {};
     inverse_hadper_trans_single_den = {};
 else
@@ -366,19 +348,16 @@ return;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Some auxiliary functions 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 
 function [Tforward, Tinverse] = getTransfMatrix (N, transform_type, dec_levels)
-%
-% Create forward and inverse transform matrices, which allow for perfect
-% reconstruction. The forward transform matrix is normalized so that the 
-% l2-norm of each basis element is 1.
+
 %
 % [Tforward, Tinverse] = getTransfMatrix (N, transform_type, dec_levels)
 %
