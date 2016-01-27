@@ -1,6 +1,7 @@
 function C = cartoon(A)
 
 % It is a function used for image abstraction using bilateral filtering.
+% Bilateral Filter is also a type of non-linear filter (like BM3D filter)
 
 
 
