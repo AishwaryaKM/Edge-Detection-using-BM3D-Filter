@@ -64,7 +64,7 @@ figure,imshow(sobel_im_M);title('Sobel Edge operator using Median filter ');
 %[ sobel_im_B ] = sobel( Ib,150 );
 figure,imshow(sobel_im_B);title('Sobel Edge operator using Bilateral filter ');
 
-%Calculate PSNR, PR, MSE,
+%Calculate PSNR, PR, MSE
 %bm3d filtered 
 %sobel_bm3d=resizem(sobel_bm3d,[321 481]);
 [ psnrb,mseb ] = pme(sobel_bm3d,gimg);disp('PSNR of bm3d(Sobel)=');disp(psnrb);disp('MSE of bm3d(Sobel)=');disp(mseb);
@@ -213,7 +213,7 @@ prg=PR(canny_im_G,gimg);disp('PR of Gaussian(Canny)=');disp(prg);
 [ psnrm,msem ] = pme(canny_im_M,gimg);disp('PSNR of Median(Canny)=');disp(psnrm);disp('MSE of Median(Sobel)=');disp(msem);
 prm=PR(canny_im_M,gimg);disp('PR of Median(Canny)=');disp(prm);
 
-%Bilateral filtered
+%Bilateral filtered (Non linear filtering)
 %sobel_im_B=resizem(sobel_im_B,[321 481]);
 [ psnrbi,msebi ] = pme(canny_im_B,gimg);disp('PSNR of Bilateral(Canny)=');disp(psnrbi);disp('MSE of Bilateral(Sobel)=');disp(msebi);
 prbi=PR(canny_im_B,gimg);disp('PR of Bilateral(Canny)=');disp(prbi);
