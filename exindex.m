@@ -46,14 +46,7 @@ end
 % -------------------------------------------------------------------------
 
 function [exindices, rules, nd, sz] = getinputs(arr, varargin)
-% Sort out and check arguments. Inputs are as given in the help comments
-% for exindex. Outputs are cell arrays; each element of exindices is a
-% set of integer extended indices which has been checked for validity; each
-% element of rules is a rule which has not been checked for validity.
 
-% Use index/rules arguments only to establish no. dimensions - ndims(arr)
-% is no use, as trailing singleton dimensions truncated and vectors can be
-% 2D or 1D
 nd = length(varargin);
 if nd == 0
     error('exindex:missingargs', 'Not enough arguments');
@@ -86,10 +79,7 @@ sz = size(arr);
 ndarr = ndims(arr);
 if nd < ndarr
     if nd == 1 && ndarr == 2
-        % Matlab allows vectors to be indexed with a single subscript and
-        % to retain their shape. In all other cases (including scalars) a
-        % single subscript causes the output to take the same shape as the
-        % subscript array - we can't deal with this.
+
         if sz(1) == 1 && sz(2) > 1
             % have a row vector
             exindices = [{1} exindices {1}];
@@ -112,13 +102,8 @@ elseif nd > ndarr
     sz = [sz ones(1, nd-ndarr)];
 end
 
-% Expand any colons now to simplify checking.
-% It's tempting to allow the 'end' keyword here: easy to substitute the
-% size of the dimension. However, to be worthwhile it would be necessary to
-% use evalin('caller',...) so that expressions using end could be given as
-% in normal indexing. This would mean moving the code up to exindex itself,
-% and evalin makes for inefficiency and fragility, so this hasn't been
-% done.
+% Expand any colons to simplify checking.
+
 colons = strcmp(exindices, ':');
 if any(colons)  % saves a little time
     exindices(colons) = arrayfun(@(x) {1:x}, sz(colons));
@@ -155,11 +140,7 @@ if ischar(rule)    % pad with rule
     
 elseif iscell(rule) && isscalar(rule)     % pad with constant
     
-    % The main messiness is due to constant padding. This can't be done
-    % with indexing into the original array, but we want the indexing
-    % structure to be preserved, so for now we index to element 1 on each
-    % dimension, and record the indices of the regions that need to be
-    % fixed.
+
     
     tofill = ind < 1 | ind > s;
     ind(tofill) = 1;
