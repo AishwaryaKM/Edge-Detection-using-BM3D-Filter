@@ -1,7 +1,6 @@
 function [e, thresh] = canny(im, varargin)
 
 
-
 % Sort arguments. Most checking done by other functions.
 inp = inputParser;
 checkthresh = @(t) checkattributes(t, {'numeric'}, ...
