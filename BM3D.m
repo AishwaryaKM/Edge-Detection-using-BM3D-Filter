@@ -1,8 +1,6 @@
 function [PSNR, y_est] = BM3D(y, z, sigma, profile, print_to_screen)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
-%  BASIC USAGE EXAMPLES:
-%
+
 %     Case 1) Using the default parameters (i.e., image name, sigma, etc.)
 % 
 %      [PSNR, y_est] = BM3D;
@@ -53,11 +51,7 @@ function [PSNR, y_est] = BM3D(y, z, sigma, profile, print_to_screen)
 %                                 image is available, otherwise PSNR = 0                                               
 %     2) y_est (matrix M x N): Final estimate (in the range [0,1])
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% In case, a noisy image z is not provided, then use the filename 
-%%%%  below to read an original image (might contain path also). Later, 
-%%%%  artificial AWGN noise is added and this noisy image is processed 
-%%%%  by the BM3D.
+
 %%%%
 image_name = [
 %     'montage.png'
@@ -73,19 +67,6 @@ image_name = [
 %     'man.png'
     ];
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%  Quality/complexity trade-off profile selection
-%%%%
-%%%%  'np' --> Normal Profile (balanced quality)
-%%%%  'lc' --> Low Complexity Profile (fast, lower quality)
-%%%%
-%%%%  'high' --> High Profile (high quality, not documented in [1])
-%%%%
-%%%%  'vn' --> This profile is automatically enabled for high noise 
-%%%%           when sigma > 40
-%%%%
-%%%%  'vn_old' --> This is the old 'vn' profile that was used in [1].
-%%%%           It gives inferior results than 'vn' in most cases. 
 %%%%
 if (exist('profile') ~= 1)
     profile         = 'np'; %% default profile
@@ -102,7 +83,7 @@ end
 %%%% Following are the parameters for the Normal Profile.
 %%%%
 
-%%%% Select transforms ('dct', 'dst', 'hadamard', or anything that is listed by 'help wfilters'):
+%%%% Select transforms ('dct', 'dst', 'hadamard'):
 transform_2D_HT_name     = 'bior1.5'; %% transform used for the HT filt. of size N1 x N1
 transform_2D_Wiener_name = 'dct';     %% transform used for the Wiener filt. of size N1_wiener x N1_wiener
 transform_3rd_dim_name   = 'haar';    %% transform used in the 3-rd dim, the same for HT and Wiener filt.
@@ -344,14 +325,6 @@ end
 return;
 
 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Some auxiliary functions 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
