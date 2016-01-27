@@ -23,8 +23,7 @@ g = inp.Results.g;
 method = inp.Results.Method;
 rad = inp.Results.Radius;
 
-% Get and check no. dimensions. Currently only to 2 or 3-D, but could
-% generalise to N if needed.
+
 ndim = length(g);
 if ndim < 2 || ndim > 3
     error('DavidYoung:nonmaxSuppression:dimsNot2or3', ...
