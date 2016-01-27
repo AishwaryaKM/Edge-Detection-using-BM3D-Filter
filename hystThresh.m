@@ -1,6 +1,6 @@
 function e = hystThresh(e, g, thresh, conn)
 %   E = HYSTTHRESH(E, G, THRESH) takes a raw edge map, a gradient magnitude
-%   array and a threshold or pair of thresholds, and returns a new edge map
+%   array and a threshold or a pair of thresholds, and returns a new edge map
 %   wherever the gradient magnitude exceeds or equals the lower threshold
 %   and is connected to a position where the gradient exceeds or equals the
 %   higher threshold.
