@@ -1,5 +1,5 @@
 function [ pr_value ] = PR( Timg,Gimg )
-%function to calculate performance ration (PR)
+%function to calculate the performance ration (PR) of edge detector
 %Note: Timg=Test image, Gimg=Ground truth image
 
 t1=Gimg;
